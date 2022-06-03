@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+// This is our Service layer//
 @Service // describes this as a Service using the annotation//
 public class StudentService {
 
