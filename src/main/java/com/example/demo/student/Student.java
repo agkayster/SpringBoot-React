@@ -1,13 +1,17 @@
 package com.example.demo.student;
 
 import java.time.LocalDate;
+import java.time.Period;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+// import javax.persistence.Entity;
+// import javax.persistence.GeneratedValue;
+// import javax.persistence.GenerationType;
+// import javax.persistence.Id;
+// import javax.persistence.SequenceGenerator;
+// import javax.persistence.Table;
+
+// import org.springframework.data.annotation.Transient;
 
 // Student Class //
 @Entity
@@ -21,6 +25,7 @@ public class Student {
   private String name;
   private String email;
   private LocalDate dob;
+  @Transient
   private int age;
 
   // // Constructor that is empty
@@ -28,21 +33,19 @@ public class Student {
   }
 
   // Constructor that has all the details
-  public Student(Long id, String name, String email, LocalDate dob, int age) {
+  public Student(Long id, String name, String email, LocalDate dob) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.dob = dob;
-    this.age = age;
   }
 
   // // Constructor without the "id" property because it will be generated
   // // automatically//
-  public Student(String name, String email, LocalDate dob, int age) {
+  public Student(String name, String email, LocalDate dob) {
     this.name = name;
     this.email = email;
     this.dob = dob;
-    this.age = age;
   }
 
   // Here we create Getters and Setters//
@@ -79,7 +82,7 @@ public class Student {
   }
 
   public Integer getAge() {
-    return age;
+    return Period.between(this.dob, LocalDate.now()).getYears();
   }
 
   public void setAge(int age) {
